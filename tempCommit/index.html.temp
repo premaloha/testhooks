@@ -3,7 +3,7 @@ public class abc
     function getABC()
     {
     }
-    function putABC(int a, int b)
+    function putABC()
     {
     }
 }
