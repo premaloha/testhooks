@@ -3,6 +3,7 @@ public class abc
     function getABCUpdated()
     {
         a = this;
+        b= this;
     }
     function putABC()
     {
