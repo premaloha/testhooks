@@ -1,0 +1,66 @@
+#!/bin/sh
+createTempfile()
+{	
+	if [ ! -d ${1}.temp ]
+	then
+		cat $1 > "tempCommit/${1}.temp"  # copy content from one file to another file.		
+		updateFileContent #"tempCommit/${1}.temp";
+	else
+	echo "Error: File exits!"
+	fi
+}
+
+updateFileContent()
+{
+	generate Content
+	sed -i "s/function getABC()/${content}/g" "index.html"
+}
+
+##
+# this will help to create tempCommit Directory where we will store temp files while processing.
+##
+
+createTempCommitDir()
+{
+	if [ ! -d $1 ]
+	then
+		mkdir -p $1
+	else
+	echo "Error: $1 directory exits!"
+	fi
+}
+
+removeTempCommitDir()
+{	
+	if [ -d "$1" ]; then		
+		rm -rf "$1"
+	fi
+}
+
+###
+# Main body of script starts here
+###
+
+createTempCommitDir "tempCommit"; 
+var=$(git diff --cached --name-only)
+
+# read Files which are ready to commit
+
+for word in $var
+do
+    if [ -e $word ]
+	then
+		filename=$(basename "$word")
+		extension="${filename##*.}"
+		echo $extension;
+		if [ $extension == 'html' ]; then		# if extension will be desired then it will work		
+			createTempfile $word; # Method call with parameter $word
+		else		
+			echo "These files not allowed."
+		fi
+	else
+		echo $word."File Does not exists"
+	fi
+done
+
+# removeTempCommitDir "tempCommit" # remove tempDirectory this will be used to delete tempCommit Directory.

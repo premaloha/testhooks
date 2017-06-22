@@ -7,7 +7,6 @@ public class abc
     {
         int a = 0;
         int b = 1;
-        a+b=1;
-		123
+        a+b=1;		
     }
 }
