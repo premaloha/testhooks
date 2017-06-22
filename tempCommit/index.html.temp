@@ -1,0 +1,13 @@
+public class abc
+{
+    function getABCUpdated()
+    {
+        a = this;
+    }
+    function putABC()
+    {
+        int a = 0;
+        int b = 1;        
+        echo "Answer:".a+b;	
+    }
+}
